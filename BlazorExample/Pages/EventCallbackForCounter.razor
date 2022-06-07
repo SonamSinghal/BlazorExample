@@ -1,0 +1,21 @@
+﻿@page "/counter"
+
+<h3>EventCallbackForCounter</h3>
+
+<p>Current count: @currentCount</p>
+
+
+<Counter SetCurrentCount=SetCurrentCount111></Counter>
+
+@code {
+
+    private int currentCount;
+    private void SetCurrentCount111(int value)
+    {
+        currentCount = value;
+
+    }
+
+
+
+}

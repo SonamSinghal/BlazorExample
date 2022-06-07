@@ -1,0 +1,49 @@
+﻿@page "/"
+@inherits DateTimeBaseComponent
+
+
+<h1>Hello, world!</h1>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<div>
+    <p>
+        ID: @person.Id
+        <br />
+        Name: @person.Name
+    </p>
+
+    <p>Date: @dateTime</p>
+
+    <br /><br />
+    <input @bind-value=@person.Name @bind-value:event="oninput" />
+
+    <input type="checkbox" @bind=@person.IsActive />
+    @person.IsActive
+
+</div>
+
+
+@code{
+
+    Person person = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        person=new Person
+        {
+            Id=1,
+            Name="Sonam"
+        };
+    }
+
+
+    public class Person
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsActive { get; set; } = false;
+    }
+}
