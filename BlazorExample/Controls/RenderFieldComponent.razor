@@ -1,0 +1,41 @@
+﻿@typeparam TItem
+
+@Header
+@foreach (var item in Items)
+{
+    @Row(item)
+}
+
+
+@if (this.ItemToEdit != null)
+{
+    @EditItem(ItemToEdit)
+
+}
+
+@Footer
+
+
+
+
+@code {
+
+    [Parameter]
+    public List<TItem> Items { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> Row { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> EditItem { get; set; }
+
+    public TItem ItemToEdit { get; set; }
+
+    [Parameter]
+    public RenderFragment Header { get; set; }
+
+    [Parameter]
+    public RenderFragment Footer { get; set; }
+
+
+}

@@ -1,0 +1,26 @@
+﻿@if (dialog) {
+<h3>DialogComponent</h3>   
+}
+
+
+@code {
+
+    private bool dialog = false;
+
+    public void Show()
+    {
+        if (this.dialog)
+        {
+            this.dialog = false;
+            StateHasChanged();
+        }
+
+        else
+        {
+            this.dialog = true;
+            StateHasChanged();
+        }
+
+    }
+
+}

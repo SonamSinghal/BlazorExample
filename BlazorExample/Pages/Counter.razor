@@ -4,7 +4,15 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<button class="btn" @onclick="(()=>
+                              {
+                                  dialog.Show();
+                              })">Show Dialog</button>
+<DialogComponent @ref="dialog"></DialogComponent>
+
 @code {
+
+    private DialogComponent dialog;
 
     [Parameter]
     public EventCallback<int> SetCurrentCount { get; set; }

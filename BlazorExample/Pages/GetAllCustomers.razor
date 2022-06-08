@@ -1,0 +1,70 @@
+﻿@page "/allCustomers"
+
+<h3>GetAllCustomers</h3>
+
+<RenderFieldComponent @ref="render" Items="customers">
+    <Row Context="customer">
+        @customer.Name
+        @customer.Email
+        <div><button class="btn" @onclick="(()=> { EditCustomer(customer); })">Edit</button></div>
+    </Row>
+
+    <EditItem Context="currCustomer">
+        <div>
+            <text>Customer Name:</text>
+            <input type="text" class="form-control" @bind-value="currCustomer.Name" @bind-value:event="oninput" />
+        </div>
+
+        <div>
+            <text>Customer Email:</text>
+            <input type="Email" class="form-control" @bind-value="currCustomer.Email" @bind-value:event="oninput" />
+        </div>
+
+    </EditItem>
+</RenderFieldComponent>
+
+@code {
+
+    private Customer currCustomer;
+    private RenderFieldComponent<Customer> render;
+    public List<Customer> customers { get; set; }
+
+    public class Customer {
+
+        public Customer() { }
+
+        public Customer(int id, string name, string email)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+        }
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Customer cust = new Customer();
+
+        customers = new List<Customer>();
+        customers.AddRange(new Customer[]
+        {
+            new Customer(cust.Id=1, cust.Name="Sonam", cust.Email="sonam@gmail.com"),
+            new Customer(cust.Id=2, cust.Name="Sonam", cust.Email="sonam@gmail.com"),
+            new Customer(cust.Id=3, cust.Name="Sonam", cust.Email="sonam@gmail.com"),
+            new Customer(cust.Id=4, cust.Name="Sonam", cust.Email="sonam@gmail.com"),
+            new Customer(cust.Id=5, cust.Name="Sonam", cust.Email="sonam@gmail.com"),
+        });
+    }
+
+    private void EditCustomer(Customer currCustomer)
+    {
+        render.ItemToEdit = currCustomer;
+    }
+}
+

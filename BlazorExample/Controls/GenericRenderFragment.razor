@@ -1,0 +1,59 @@
+﻿@typeparam TItem
+@using System.Reflection
+
+
+@if (members != null && members.Length > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                @foreach(var item in members)
+                {
+                    @if (item.MemberType == MemberTypes.Property)
+                    {
+                        <th>@item.Name</th>
+                    }
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var item in this.items)
+                {
+            <tr>
+                @foreach (var member in members)
+                {
+                    @if (member.MemberType == MemberTypes.Property)
+                    {
+                        <td>@item.GetType().GetProperty(member.Name).GetValue(item)</td>
+                    }
+
+                }
+            </tr>
+                }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    [Parameter]
+    public List<TItem> items { get; set; }
+
+    MemberInfo[] members;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (items != null && items.Count > 0)
+        {
+            var first=this.items.First();
+            Type typeOfItem = this.items[0].GetType();
+            members = typeOfItem.GetMembers();
+        }
+    }
+
+
+
+}
